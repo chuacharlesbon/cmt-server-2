@@ -1,10 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { connectToMongoDB } from "../../../mongodb";
+import clientPromise from "../../../lib/mongodbclient";
 
 export default async function handler(req, res) {
   const postBody = req.body;
     try {
-        const db = await connectToMongoDB();
+        await clientPromise;
+        const client = await clientPromise;
+        const db = client.db("CaptivePortal");
+        //const db = await connectToMongoDB();
         const data = await db.collection("posts").find({}).toArray();
         res.status(200).json({
           message: "TQ - Captive Portal",

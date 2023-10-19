@@ -7,7 +7,14 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const postBody = req.body;
     try {
-        const db = await connectToMongoDB();
+        await clientPromise;
+        const client = await clientPromise;
+        const db = client.db("CaptivePortal");
+        //
+        // Then you can execute queries against your database like so:
+        // db.find({}) or any of the MongoDB Node Driver commands
+
+        //const db = await connectToMongoDB();
         //const data = await db.collection("posts").find({}).toArray();
         //const data = await db.collection("users-test").find({}).toArray();
         const userA = await db.collection('users-test').findOne({ mobile_number: postBody.mobileNumber ?? "" });
