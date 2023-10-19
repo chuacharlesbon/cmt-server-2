@@ -10,11 +10,11 @@ export default async function handler(req, res) {
         //const data = await db.collection("posts").find({}).toArray();
         //const data = await db.collection("users-test").find({}).toArray();
         const userA = await db.collection('users-test').findOne({ mobile_number: postBody.mobileNumber ?? "" });
-        const userB = await db.collection('users-test').findOne({ mobile_number: postBody.email ?? "" });
+        const userB = await db.collection('users-test').findOne({ email: postBody.email ?? "" });
         //await db.createCollection('users-test');
-        if(userA){
+        if(userA && postBody.mobileNumber){
           res.status(400).json({error: "Mobile number already exist!"});
-        }else if(userB){
+        }else if(userB && postBody.email){
           res.status(400).json({error: "Email already exist!"});
         }else{
           await db.collection('users-test').insertOne({
