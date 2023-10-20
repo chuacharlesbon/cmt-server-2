@@ -7,8 +7,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://captive-portal-connect.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === "POST") {
-    const postBody = req.body;
+  const postBody = req.body;
     try {
         const db = await connectToMongoDB();
         //const data = await db.collection("posts").find({}).toArray();
@@ -35,7 +34,4 @@ export default async function handler(req, res) {
     } catch (error) {
       res.status(400).json({ error: "Something went wrong" });
     }
-  } else {
-    res.status(405).json({ error: "Method not allowed" });
-  }
 }
