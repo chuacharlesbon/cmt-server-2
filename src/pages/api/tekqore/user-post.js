@@ -4,7 +4,7 @@ import clientPromise from "../../../../lib/mongodbclient";
 //import User from "../../../models/User";
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://captive-portal-connect.vercel.app');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   const postBody = req.body;
