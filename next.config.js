@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  async headers() {
+      return [
+          {
+              // matching all API routes
+              source: "/api/:path*",
+              headers: [
+                  { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
+              ]
+          }
+      ]
+  }
 }
 
 module.exports = nextConfig
