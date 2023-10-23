@@ -14,7 +14,18 @@ export default async function handler(req, res) {
         //const data = await db.collection("users-test").find({}).toArray();
         const userA = await db.collection('users-test').findOne({ mobile_number: postBody.mobileNumber ?? "" });
         const userB = await db.collection('users-test').findOne({ email: postBody.email ?? "" });
-        //await db.createCollection('users-test');
+        
+        //await db.createCollection('users');
+        //await db.createCollection('visits');
+        //await db.collection('visits').updatePost('123', { title: 'New title' });
+
+        const visit = await db.collection('visits').findOne({ referrer: postBody.referrer ?? "" });
+        if(visit){
+          //
+        }else if(postBody.referrer != ""){
+          await db.collection('visits').insertOne({referrer: postBody.referrer});
+        }
+        
         if(userA && postBody.mobileNumber){
           res.status(400).json({error: "Mobile number already exist!"});
         }else if(userB && postBody.email){
