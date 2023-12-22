@@ -7,7 +7,7 @@ async function connectToMongoDB() {
   // Connect to MongoDB.
   const client = await MongoClient.connect(connectionString);
   // Return the database connection.
-  return client.db('CaptivePortal');
+  return client.db(process.env.DB_NAME);
 }
 
 module.exports = {
